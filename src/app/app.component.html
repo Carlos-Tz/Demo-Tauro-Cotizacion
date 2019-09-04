@@ -1,20 +1,216 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div id="app">
+  <section>
+    <div class="page">
+      <div class="inner">
+        <header class="header">
+          <div class="logo">
+            <img src="assets/logo.png" alt="">
+          </div>
+          <div class="title">
+            <div class="col1 flex-container column-center-center">
+              <h1>COTIZACIÓN</h1>
+              <h2 style="font-weight: bold;">Abel Heriberto Tapia Flores</h2>
+              <p>Av. Hidalgo Sur No. 3</p>
+              <p>Col. La Aldea C.P. 58300</p>
+              <p>Morelia, Mich.</p>
 
+            </div>
+            <div class="col2 flex-container">
+              <div class="pregunta">
+                <span class="pregunta__nombre">FOLIO:</span>
+                <input type="number" class="folio focusNext" autofocus tabindex="1">
+              </div>
+              <div class="pregunta">
+                <span class="pregunta__nombre">AUTORECEPCIÓN:</span>
+<!--                 <input type="date" style="font-size: .75rem; "> -->
+                <span style="font-size: .75rem;">{{ this.fecha }}</span>
+              </div>
+            </div>
+          </div>
+        </header>
+        <section class="content">
+          <section class="section1">
+            <div class="row">
+              <span>NOMBRE:</span>
+              <input type="text" class="left-aligned focusNext" tabindex="2">
+            </div>
+            <div class="row">
+              <span>DOMICILIO:</span>
+              <input type="text" class="left-aligned focusNext" tabindex="3">
+            </div>
+            <div class="row">
+              <div class="pregunta" style="width: 50%;">
+                <span>TELÉFONO:</span>
+                <input type="text" class="focusNext" tabindex="4">
+              </div>
+              <div class="pregunta" style="width: 50%;">
+                <span>UNIDAD:</span>
+                <input type="text" class="focusNext" tabindex="5">
+              </div>
+            </div>
+            <div class="row">
+              <div class="pregunta" style="width: 50%;">
+                <span>MODELO:</span>
+                <input type="text" class="focusNext" tabindex="6">
+              </div>
+              <div class="pregunta" style="width: 50%;">
+                <span>KILÓMETROS:</span>
+                <input type="text" class="focusNext" tabindex="7">
+              </div>
+            </div>
+            <div class="row">
+              <div class="pregunta" style="width: 50%;">
+                <span>PLACA:</span>
+                <input type="text" class="focusNext" tabindex="8">
+              </div>
+              <div class="pregunta" style="width: 50%;">
+                <span>SERIE:</span>
+                <input type="text" class="focusNext" tabindex="9">
+              </div>
+            </div>
+            <div class="row">
+              <span>OBSERVACIONES:</span>
+              <input type="text" class="focusNext" tabindex="10" style="text-align: left; padding-left: 3mm; font-size: .92rem;">
+            </div>
+          </section>
+          <section class="section2">
+            <form [formGroup]="myForm" novalidate>
+            <table formArrayName="units">
+              <thead>
+                <tr>
+                  <th>CANTIDAD</th>
+                  <th>CONCEPTO</th>
+                  <th>PRECIO</th>
+                  <th>IMPORTE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let unit of getControls(myForm, 'units'); let i=index" [formGroupName]="i">
+                  <td>
+                    <input type="number" formControlName="qty" tabindex="{{11+i*3}}" class="focusNext" autocomplete="off">
+                  </td>
+                  <td>
+                    <input type="text" tabindex="{{12+i*3}}" class="focusNext" autocomplete="off">
+                  </td>
+                  <td>
+                    <input type="number" formControlName="price" tabindex="{{13+i*3}}" class="focusNext" autocomplete="off">
+                  </td>
+                  <td><input formControlName="importe" class="importe" type="text"></td>
+                </tr>
+              </tbody>
+            </table>
+            </form>            
+          </section>
+          <section class="section3">
+            <div class="pagare-block">
+              <div class="pagare">
+                Por el presente pagaré reconozco deber y me obligo a pagar en esta ciudad o en cualquier otra que se me
+                requiera de pago a
+                <input type="text" class="pagare__input1 focusNext" tabindex="59"> a su orden el día <input type="text" class="pagare__input2 focusNext" tabindex="60">
+                la cantidad de <input type="text" class="pagare__input3 focusNext" tabindex="61">
+                <input type="text" class="pagare__input4 focusNext" tabindex="62"> valor recibido en mercancía. Este pagaré es mercantil y está
+                rigido por la Ley General de Títulos y Operaciones de Crédito en su artículo 173
+                párrafo final y demás correlativos por no ser pagaré domiciliado.
+              </div>
+              <div style=" text-align:center; margin: 0 auto;">
+                <!-- <p style="font-size: 1.5em;">ACEPTO</p>
+                <p style="font-size: 1.5em;">NO DEJO OBJETOS DE VALOR</p> -->
+                <div class="sign">
+                  <!-- <signature-pad [options]="signaturePadOptions"></signature-pad> -->
+                  <div class="signature">
+                    <div id="contSign" onclick="btn_click()">
+                      <img src="" id="imgSign">
+                    </div>
+                  </div>
+                  <hr>
+                  <div>
+                    <a style="font-size: 1em;">Firma de conformidad</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="totals">
+              <table>
+                <tbody>
+                  <tr>
+                    <th>Subtotal: $</th>
+                    <td><input type="number" value="{{totalRef}}"></td>
+                  </tr>
+                  <tr>
+                    <th>I.V.A. $</th>
+                    <td><input type="number" value="{{iva}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Anticipo: $</th>
+                    <td><input type="number"></td>
+                  </tr>
+                  <tr>
+                    <th>Total: $</th>
+                    <td><input type="number" value="{{total}}" style="font-weight: 600;"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+  </section>
+  <!-- <section>
+    <div class="page">
+      <div class="inner">
+        <div class="section6">
+          <h3 id="sub_title">ESTADO DEL VEHÍCULO</h3><br>
+          <div class="table">
+            <div class="tr thead">
+              <div class="td">Imagen</div>
+              <div class="td ">Descripción</div>
+            </div>
+            <div class="tr">
+              <div class="td">
+                <div class="image-container">
+                  <input type="file" accept="image/*" name="img1" onchange="showMyImage(this)">
+                </div>
+              </div>
+              <div class="td "><textarea name="img1d" id="txa" rows="12" wrap="soft" tabindex="64" class="focusNext"
+                  autocomplete="off"></textarea></div>
+            </div>
+            <div class="tr">
+              <div class="td">
+                <div class="image-container">
+                  <input type="file" accept="image/*" name="img2" onchange="showMyImage(this)">
+                </div>
+              </div>
+              <div class="td "><textarea name="img2d" id="txa" rows="12" wrap="soft" tabindex="65" class="focusNext"
+                  autocomplete="off"></textarea></div>
+            </div>
+            <div class="tr">
+              <div class="td">
+                <div class="image-container">
+                  <input type="file" accept="image/*" name="img3" onchange="showMyImage(this)">
+                </div>
+              </div>
+              <div class="td "><textarea name="img3d" id="txa" rows="12" wrap="soft" tabindex="66" class="focusNext"
+                  autocomplete="off"></textarea></div>
+            </div>
+            <div class="tr">
+              <div class="td ">
+                <div class="image-container">
+                  <input type="file" accept="image/*" name="img4" onchange="showMyImage(this)">
+                </div>
+              </div>
+              <div class="td  "><textarea name="img4d" id="txa" rows="12" wrap="soft" tabindex="67" class="focusNext"
+                  autocomplete="off"></textarea></div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section> -->
+
+  <div class="no-print" id="printBtn" onclick="window.print()">
+    <img src="assets/Boton guardar.png" alt="" width="75" height="75">
+  </div>
+</div>
